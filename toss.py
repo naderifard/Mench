@@ -8,5 +8,3 @@ def toss():
         if x!= 6:
             break
     return tosslist
-for i in range(10):
-    print(toss())
