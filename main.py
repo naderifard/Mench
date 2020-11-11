@@ -1,45 +1,75 @@
-colors=["Blue","Red","Green","Yellow"]
-bluepath=["b1","b2","b3","b4","b5","b6","b7","b8","b9"]
-blueSPECIAL=["B1","B2","B3","B4"]
-redpath=["r1","r2","r3","r4","r5","r6","r7","r8","r9"]
-redSPECIAL=["R1","R2","R3","R4"]
-greenpath=["g1","g2","g3","g4","g5","g6","g7","g8","g9"]
-greenSPECIAL=["G1","G2","G3","G4"]
-yellowpath=["y1","y2","y3","y4","y5","y6","y7","y8","y9"]
-yellowSPECIAL=["Y1","Y2","Y3","Y4"]
-Path=[bluepath,redpath,greenpath,yellowpath]
-SPECIAL=[blueSPECIAL,redSPECIAL,greenSPECIAL,yellowSPECIAL]
+from toss import toss
+from classes import Piece,Person
+from data import colors
+winner=None
+player1=Person("Behdad","Blue")
+player2=Person("Khashi","Red")
+players=[player1,player2]
+
+turn=None
+t=toss()
+print(t)
+if t[0]<=3:
+    T=0
+else:
+    T=1
+
+turn=players[T]
+print(players[T].name+" begins:")
+def myfunc(t,turn):
+    for i in t:
+        if i==6:
+            if turn.n!=4:
+                tmp=input("enter or go?")
+                if tmp=="enter" and turn.pieces[0].check_enter:
+                    for j in turn.pieces:
+                        k=turn.pieces[j]
+                        if k.place=="out":
+                            k.enter()
+                            break
+                elif tmp=="go":
+                    p=int(input("choose your piece(number):"))
+                    if turn.pieces[p].check_move(i):
+                        turn.pieces[p].move(i)
+            if turn.n==4:
+                p = int(input("choose your piece(number):"))
+                if turn.pieces[p].check_move(i):
+                    turn.pieces[p].move(i)
+        else:
+            p = int(input("choose your piece(number):"))
+            if turn.pieces[p].check_move(i):
+                turn.pieces[p].move(i)
 
 
-mainboard=[]
-for i in (Path+SPECIAL):
-    mainboard += i
+while not winner:
+    if turn.n==0:
+        for i in range(3):
+            t=toss()
+            print(t)
+            if t[0]==6:
+                turn.pieces[0].enter()
+                t=t[1:]
+                myfunc(t,turn)
+                break
 
+        if turn.win:
+            print(players[T].name+" WON!")
+            break
 
+        T+=1
+        T%=2
+        turn=players[T]
+        print("turn="+(players[T]).name)
+    else:
+        t=toss()
+        print(t)
+        myfunc(t,turn)
 
-class mohre:
-    def __init__(self,color,place):
-        self.color=color
-        self.place=place
-    @property
-    def path(self):
-        path=[]
-        i = colors.index(self.color)
-        for j in Path[i:]:
-            path+=j
-        for k in Path[:i]:
-            path+=k
-        path+=SPECIAL[i]
-        return path
-            
-
-
-ali1=mohre("Green","y9")
-print(ali1.path)
-
-
-
-
-
-
+        if turn.win:
+            print(players[T].name+" WON!")
+            break
+        T += 1
+        T %= 2
+        turn = players[T]
+        print("turn="+(players[T]).name)
 
