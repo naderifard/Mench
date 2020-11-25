@@ -1,5 +1,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+userpass={"behdad":"negatron96","khashi":"kniroo","hossein":"137590","mahdi":"phpguy"}
 
 
 class Ui_LoginForm(object):
@@ -53,6 +54,18 @@ class Ui_LoginForm(object):
 
         self.retranslateUi(LoginForm)
         QtCore.QMetaObject.connectSlotsByName(LoginForm)
+    def check(self):
+        user=self.lineEdit.text()
+        passw=self.lineEdit_2.text()
+        color=self.comboBox.currentText()
+        if user in userpass:
+            if userpass[user]==passw:
+                c_index=self.comboBox.currentIndex()
+                return [True,user,color,c_index]
+            else:
+                return [False]
+        else:
+            return [False]
 
     def retranslateUi(self, LoginForm):
         _translate = QtCore.QCoreApplication.translate
@@ -66,12 +79,3 @@ class Ui_LoginForm(object):
         self.label_3.setText(_translate("LoginForm", "color"))
         self.pushButton.setText(_translate("LoginForm", "Login"))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    LoginForm = QtWidgets.QWidget()
-    ui = Ui_LoginForm()
-    ui.setupUi(LoginForm)
-    LoginForm.show()
-    sys.exit(app.exec_())
