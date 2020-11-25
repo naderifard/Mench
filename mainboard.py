@@ -1,7 +1,7 @@
 import login
 from PyQt5 import QtCore, QtGui, QtWidgets
 players={}
-from data import outy,outb,outg,outr
+from data import *
 
 
 
@@ -304,7 +304,8 @@ class Ui_Form(object):
             icon.addPixmap(QtGui.QPixmap("colors/red.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.red[i].setIcon(icon)
             self.red[i].setIconSize(QtCore.QSize(30, 40))
-        for i in [self.yellow,self.blue,self.green,self.red]:
+        self.allP=[self.yellow,self.blue,self.green,self.red]
+        for i in self.allP:
             for j in i:
                 j.setEnabled(False)
 
@@ -356,6 +357,9 @@ class Ui_Form(object):
             user=res[1]
             color=res[2]
             players[user]=color
+            i=colors.index(color)
+            for j in self.allP[i]:
+                j.setEnabled(True)
             l0.comboBox.removeItem(res[3])
             login.userpass.pop(user)
             self.add_list(user,len(players))
