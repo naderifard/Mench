@@ -1,4 +1,9 @@
 from data import *
+
+boarddic={}
+for i in mainboard:
+    boarddic[i]=None
+
 class Piece:
     def __init__(self,color):
         self.color=color
