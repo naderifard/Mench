@@ -1,5 +1,8 @@
-
+import login
 from PyQt5 import QtCore, QtGui, QtWidgets
+players={}
+from data import outy,outb,outg,outr
+
 
 
 class Ui_Form(object):
@@ -146,7 +149,7 @@ class Ui_Form(object):
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(600, 130, 501, 511))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../mench board.png"))
+        self.label.setPixmap(QtGui.QPixmap("./newboard.jpg"))
         self.label.setObjectName("label")
         self.groupBox = QtWidgets.QGroupBox(Form)
         self.groupBox.setGeometry(QtCore.QRect(60, 110, 211, 261))
@@ -189,19 +192,23 @@ class Ui_Form(object):
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
         self.progressBar_1 = QtWidgets.QProgressBar(self.gridLayoutWidget)
-        self.progressBar_1.setProperty("value", 24)
+        self.progressBar_1.setProperty("value", 0)
+        self.progressBar_1.setStyleSheet("QProgressBar::chunk ""{""background-color: greenyellow;""}")
         self.progressBar_1.setObjectName("progressBar_1")
         self.gridLayout.addWidget(self.progressBar_1, 0, 1, 1, 1)
         self.progressBar_5 = QtWidgets.QProgressBar(self.gridLayoutWidget)
-        self.progressBar_5.setProperty("value", 24)
+        self.progressBar_5.setProperty("value", 0)
+        self.progressBar_5.setStyleSheet("QProgressBar::chunk ""{""background-color: greenyellow;""}")
         self.progressBar_5.setObjectName("progressBar_5")
         self.gridLayout.addWidget(self.progressBar_5, 3, 1, 1, 1)
         self.progressBar_4 = QtWidgets.QProgressBar(self.gridLayoutWidget)
-        self.progressBar_4.setProperty("value", 24)
+        self.progressBar_4.setProperty("value", 0)
+        self.progressBar_4.setStyleSheet("QProgressBar::chunk ""{""background-color: greenyellow;""}")
         self.progressBar_4.setObjectName("progressBar_4")
         self.gridLayout.addWidget(self.progressBar_4, 2, 1, 1, 1)
         self.progressBar_3 = QtWidgets.QProgressBar(self.gridLayoutWidget)
-        self.progressBar_3.setProperty("value", 24)
+        self.progressBar_3.setProperty("value", 0)
+        self.progressBar_3.setStyleSheet("QProgressBar::chunk ""{""background-color: greenyellow;""}")
         self.progressBar_3.setObjectName("progressBar_3")
         self.gridLayout.addWidget(self.progressBar_3, 1, 1, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget)
@@ -238,41 +245,70 @@ class Ui_Form(object):
         self.label_Players.setGeometry(QtCore.QRect(60, 510, 81, 31))
         self.label_Players.setObjectName("label_Players")
         self.mohre1 = QtWidgets.QPushButton(Form)
-        self.mohre1.setGeometry(QtCore.QRect(440, 40, 41, 41))
         self.mohre1.setObjectName("mohre1")
         self.mohre3 = QtWidgets.QPushButton(Form)
-        self.mohre3.setGeometry(QtCore.QRect(440, 140, 41, 41))
         self.mohre3.setObjectName("mohre3")
         self.mohre11 = QtWidgets.QPushButton(Form)
-        self.mohre11.setGeometry(QtCore.QRect(440, 560, 41, 41))
         self.mohre11.setObjectName("mohre11")
         self.mohre2 = QtWidgets.QPushButton(Form)
-        self.mohre2.setGeometry(QtCore.QRect(440, 90, 41, 41))
         self.mohre2.setObjectName("mohre2")
         self.mohre9 = QtWidgets.QPushButton(Form)
-        self.mohre9.setGeometry(QtCore.QRect(440, 450, 41, 41))
         self.mohre9.setObjectName("mohre9")
         self.mohre10 = QtWidgets.QPushButton(Form)
-        self.mohre10.setGeometry(QtCore.QRect(440, 500, 41, 41))
         self.mohre10.setObjectName("mohre10")
         self.mohre8 = QtWidgets.QPushButton(Form)
-        self.mohre8.setGeometry(QtCore.QRect(440, 400, 41, 41))
         self.mohre8.setObjectName("mohre8")
         self.mohre7 = QtWidgets.QPushButton(Form)
-        self.mohre7.setGeometry(QtCore.QRect(440, 350, 41, 41))
         self.mohre7.setObjectName("mohre7")
         self.mohre6 = QtWidgets.QPushButton(Form)
-        self.mohre6.setGeometry(QtCore.QRect(440, 300, 41, 41))
         self.mohre6.setObjectName("mohre6")
         self.mohre5 = QtWidgets.QPushButton(Form)
-        self.mohre5.setGeometry(QtCore.QRect(440, 240, 41, 41))
         self.mohre5.setObjectName("mohre5")
         self.mohre4 = QtWidgets.QPushButton(Form)
-        self.mohre4.setGeometry(QtCore.QRect(440, 190, 41, 41))
         self.mohre4.setObjectName("mohre4")
         self.mohre12 = QtWidgets.QPushButton(Form)
-        self.mohre12.setGeometry(QtCore.QRect(440, 620, 41, 41))
         self.mohre12.setObjectName("mohre12")
+        self.mohre13 = QtWidgets.QPushButton(Form)
+        self.mohre13.setObjectName("mohre13")
+        self.mohre14= QtWidgets.QPushButton(Form)
+        self.mohre14.setObjectName("mohre14")
+        self.mohre15 = QtWidgets.QPushButton(Form)
+        self.mohre15.setObjectName("mohre15")
+        self.mohre16 = QtWidgets.QPushButton(Form)
+        self.mohre16.setObjectName("mohre16")
+        self.yellow=[self.mohre1,self.mohre2,self.mohre3,self.mohre4]
+        for i in range(4):
+            self.yellow[i].setGeometry(QtCore.QRect(outy[i][0],outy[i][1], 30, 40))
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("colors/yellow.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.yellow[i].setIcon(icon)
+            self.yellow[i].setIconSize(QtCore.QSize(30, 40))
+        self.blue = [self.mohre5, self.mohre6, self.mohre7, self.mohre8]
+        for i in range(4):
+            self.blue[i].setGeometry(QtCore.QRect(outb[i][0], outb[i][1], 30, 40))
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("colors/blue.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.blue[i].setIcon(icon)
+            self.blue[i].setIconSize(QtCore.QSize(30, 40))
+        self.green = [self.mohre9, self.mohre10, self.mohre11, self.mohre12]
+        for i in range(4):
+            self.green[i].setGeometry(QtCore.QRect(outg[i][0], outg[i][1], 30, 40))
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("colors/green.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.green[i].setIcon(icon)
+            self.green[i].setIconSize(QtCore.QSize(30, 40))
+        self.red = [self.mohre13, self.mohre14, self.mohre15, self.mohre16]
+        for i in range(4):
+            self.red[i].setGeometry(QtCore.QRect(outr[i][0], outr[i][1], 30, 40))
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("colors/red.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.red[i].setIcon(icon)
+            self.red[i].setIconSize(QtCore.QSize(30, 40))
+        for i in [self.yellow,self.blue,self.green,self.red]:
+            for j in i:
+                j.setEnabled(False)
+
+
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -285,6 +321,7 @@ class Ui_Form(object):
         self.pushButton_4.setText(_translate("Form", "Start Game"))
         self.pushButton_3.setText(_translate("Form", "New game"))
         self.pushButton_2.setText(_translate("Form", "Exit"))
+        __sortingEnabled = self.listWidget.isSortingEnabled()
         self.label_2.setText(_translate("Form", "player1"))
         self.label_3.setText(_translate("Form", "player2"))
         self.label_4.setText(_translate("Form", "player3"))
@@ -292,18 +329,41 @@ class Ui_Form(object):
         self.label_Turn.setText(_translate("Form", "Turn:"))
         self.pushButton_5.setText(_translate("Form", "Roll"))
         self.label_Players.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Players:</span></p></body></html>"))
-        self.mohre1.setText(_translate("Form", "PushButton"))
-        self.mohre3.setText(_translate("Form", "PushButton"))
-        self.mohre11.setText(_translate("Form", "PushButton"))
-        self.mohre2.setText(_translate("Form", "PushButton"))
-        self.mohre9.setText(_translate("Form", "PushButton"))
-        self.mohre10.setText(_translate("Form", "PushButton"))
-        self.mohre8.setText(_translate("Form", "PushButton"))
-        self.mohre7.setText(_translate("Form", "PushButton"))
-        self.mohre6.setText(_translate("Form", "PushButton"))
-        self.mohre5.setText(_translate("Form", "PushButton"))
-        self.mohre4.setText(_translate("Form", "PushButton"))
-        self.mohre12.setText(_translate("Form", "PushButton"))
+        # self.mohre1.setText(_translate("Form", "PushButton"))
+        # self.mohre3.setText(_translate("Form", "PushButton"))
+        # self.mohre11.setText(_translate("Form", "PushButton"))
+        # self.mohre2.setText(_translate("Form", "PushButton"))
+        # self.mohre9.setText(_translate("Form", "PushButton"))
+        # self.mohre10.setText(_translate("Form", "PushButton"))
+        # self.mohre8.setText(_translate("Form", "PushButton"))
+        # self.mohre7.setText(_translate("Form", "PushButton"))
+        # self.mohre6.setText(_translate("Form", "PushButton"))
+        # self.mohre5.setText(_translate("Form", "PushButton"))
+        # self.mohre4.setText(_translate("Form", "PushButton"))
+        # self.mohre12.setText(_translate("Form", "PushButton"))
+
+
+    def add_list(self,user,index):
+        self.listWidget.addItem("player" + str(index) +" : " +user)
+
+
+
+
+
+    def add_player(self,l0):
+        res=l0.check()
+        if res[0]:
+            user=res[1]
+            color=res[2]
+            players[user]=color
+            l0.comboBox.removeItem(res[3])
+            login.userpass.pop(user)
+            self.add_list(user,len(players))
+            d.close()
+            l0.lineEdit.clear()
+            l0.lineEdit_2.clear()
+
+
 
 
 if __name__ == "__main__":
@@ -313,4 +373,11 @@ if __name__ == "__main__":
     ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
+    ##_______________________________________________
+    l=login.Ui_LoginForm()
+    d=QtWidgets.QDialog()
+    l.setupUi(d)
+    ui.pushButton.clicked.connect(lambda : d.exec_())
+    l.pushButton.clicked.connect(lambda : ui.add_player(l))
+    ##_______________________________________________
     sys.exit(app.exec_())
